@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<header><title></title></header>
+
+<body>
+
+<canvas id='canvas' style='border: 1px solid; width: 800px; height: 600px;'>
+    Sorry, your browser does not support the canvas tag.</canvas>
+ 
+ 
+
+
+
+<script>
+    
+    var canvas = document.getElementById('canvas');
+    canvas.width = canvas.scrollWidth;
+    canvas.height = canvas.scrollHeight;
+
+    var ctx = canvas.getContext('2d');
+    var image = new Image();
+    image.crossOrigin = 'Anonymous';
+    image.src = './cate.jpg';
+    
+   
+    
+   
+
+    image.addEventListener('load', function(){
+
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        var pixelData = ctx.getImageData(0,0, canvas.width, canvas.height);
+        console.log(pixelData);
+        
+
+        pximg = [];
+
+        for(var i=0;i<pixelData.data.length;i+=4){
+            var r = pixelData.data[i];
+            var g = pixelData.data[i+1];
+            var b = pixelData.data[i+2];
+            var a = pixelData.data[i+3];
+            pximg.push([r,g,b,a]);
+            
+        }
+        console.log(pximg);
+        ctx.putImageData(pixelData,0,0);
+
+    })
+
+    
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>
